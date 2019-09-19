@@ -1,13 +1,20 @@
 const express = require('express')
 var morgan = require('morgan')
-const bodyParser = require('body-parser')
 const cors = require('cors')
 const config = require('./config')
 
 const app = express()
 app.use(morgan('combined'))
-app.use(bodyParser)
-app.use(cors)
+app.use(express.json())
+app.use(cors())
+
+app.get('/status', (req, res) => {
+  res.status(200).end();
+});
+app.head('/status', (req, res) => {
+  res.status(200).end();
+});
+
 
 app.get('/', (req, res) => res.send('hello world'))
 
